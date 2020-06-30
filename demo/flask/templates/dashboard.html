@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body style="background-color:black">
+  <div class="container-fluid" >
+    <div class="jumbotron text-center">
+      <h1 style="color:lightcoral">Audios and Transcriptions for {{d['firmName']}}</h1>
+      <p><a class="btn btn-primary btn-lg" href="/" role="button">Upload New File</a></p>
+    </div>
+    <!-- ultimately, iterate over these-->
+    <!-- Row 1 -->
+    <div class="row mt-5">
+	   <div class="col-md-12">
+	     <h3 style="color: white; font-weight: bold; font-family: Arial, Helvetica, sans-serif;">
+	            {{d['clientName']}} {{d['date']}}
+       </h3>
+	     <p style="color: lightcoral"><a href="{{d['audioURL']}}">Video</a></p>
+	     <p style="color:lightcoral"><a href="{{d['transcriptionURL']}}">Transcription</a></p>
+	   </div>
+	</div>
+
+	<!-- Row 2 -->
+	
+	
+
+  </div>
+</body>
+
+
+</html>

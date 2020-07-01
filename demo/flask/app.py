@@ -8,7 +8,10 @@ import firebase_admin
 from firebase_admin import credentials, firestore, initialize_app, storage
 import io
 import os
+
+# misc 
 from io import StringIO
+import time
 
 from google.cloud import speech_v1p1beta1
 
@@ -77,13 +80,14 @@ def upload_file():
             transcriptionBlob = sample_transcribe(newfile_name, object_uri, bucket)
 
             # create dictionary for firebase collection
+            blob_expiry = int(time.time() + (60 * 60 * 24 * 7)) # set for 7 days
             data = {
 
                 u'firmName': u'Hollins & Levy',
                 u'clientName': u'Shea Jensen',
                 u'date': '09-17-19', # datetime.datetime.now(),
-                u'audioURL': audioBlob.public_url,
-                u'transcriptionURL': transcriptionBlob.public_url,
+                u'audioURL': audioBlob.generate_signed_url(expiration=blob_expiry),
+                u'transcriptionURL': transcriptionBlob.generate_signed_url(expiration=blob_expiry),
             }
 
             sampleCollection_ref.document(u'Shea Jensen-9-17-19').set(data)

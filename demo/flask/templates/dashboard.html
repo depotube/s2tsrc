@@ -6,13 +6,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Dashboard</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">  
+  <style>
+    footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      text-align: center;
+      width: 100%;
+      background-color: DarkSalmon;
+      font-family: 'Courier New', Courier, monospace;
+      color: white;
+    }
+  </style>
+
 </head>
 
 <body style="background-color:black">
   <div class="container-fluid" >
     <div class="jumbotron text-center">
-      <h1 style="color:lightcoral">Audios and Transcriptions for {{d['firmName']}}</h1>
+      <h2 style="color:lightcoral">Audios and Transcriptions for {{d['firmName']}}</h2>
       <p><a class="btn btn-primary btn-lg" href="/" role="button">Upload New File</a></p>
     </div>
     <!-- ultimately, iterate over these-->
@@ -27,6 +40,10 @@
 	   </div>
 	  </div>
   </div>
+  <footer>
+    <p>Copyright (c) 2000 Depotube All Rights Reserved<br>
+    <a href="mailto:hq@depotube.com">hq@depotube.com</a></p>
+  </footer>
 </body>
 
 

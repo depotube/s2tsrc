@@ -7,11 +7,26 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Depotube Demo</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <style>
+    footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      text-align: center;
+      width: 100%;
+      background-color: DarkSalmon;
+      font-family: 'Courier New', Courier, monospace;
+      color: white;
+    }
+  </style>
 </head>
 
 
 <body style="background-color:lightblue">
   <div class="container-fluid" >
+    <div class="jumbotron text-center">
+      <h2 style="color:lightcoral">Upload for {{d['firmName']}}</h2>
+    </div>
     <div class="row mt-5">
       <div class="col-md-12">
         <h3 style="color: white; font-weight: bold; font-family: Arial, Helvetica, sans-serif;">
@@ -21,13 +36,13 @@
           <input type=file name=file>
           <input type=submit value=upload>
         </form>
-
-    <!-- <div class="jumbotron text-center">
-        Render our data 
-      <h1>{{ text }}</h1> -->
       </div>
     </div>
   </div>
+  <footer>
+    <p>Copyright (c) 2000 Depotube All Rights Reserved<br>
+    <a href="mailto:hq@depotube.com">hq@depotube.com</a></p>
+  </footer>
 </body>
 
 </html>

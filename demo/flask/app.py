@@ -42,7 +42,10 @@ bucket = storage.bucket('john-depotube-personal.appspot.com')
 @app.route("/")
 def home():
     print("Server received request for 'Home' page...")
-    return render_template("index.html")
+    data = {
+        u'firmName': u'Hollins & Levy'
+    }
+    return render_template("index.html", d=data)
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS

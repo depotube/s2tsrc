@@ -2,6 +2,7 @@
 from flask import Flask, jsonify, render_template, flash, request, redirect, url_for
 from flask import send_from_directory, current_app
 from werkzeug.utils import secure_filename
+from werkzeug.datastructures import ImmutableMultiDict
 
 # firebase imports
 import firebase_admin
@@ -12,8 +13,6 @@ import os
 # misc 
 from io import StringIO
 import time
-
-from google.cloud import speech_v1p1beta1
 
 from bob import sample_transcribe
 
@@ -33,12 +32,12 @@ os.makedirs(os.path.join(app.instance_path, 'tmp'), exist_ok=True)
 cred = credentials.Certificate('firebasekey.json')
 default_app = initialize_app(cred)
 db = firestore.client()
-# get access to firebase collection
-sampleCollection_ref = db.collection('sampleCollection')
+# get access to firebase collection (ultimately this will come from database/login)
+firmCollection_ref = db.collection('Hollins & Levy')
 # get access to firebase storage
 bucket = storage.bucket('john-depotube-personal.appspot.com')
 
-# 3. Define what to do when a user hits the index route
+# Define what to do when a user hits the index route
 @app.route("/")
 def home():
     print("Server received request for 'Home' page...")
@@ -53,6 +52,7 @@ def allowed_file(filename):
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
+        dt = dict(request.form)
         # check if the post request has the file part
         if 'file' not in request.files:
             flash('No file part')
@@ -85,43 +85,30 @@ def upload_file():
             # create dictionary for firebase collection
             blob_expiry = int(time.time() + (60 * 60 * 24 * 7)) # set for 7 days
             data = {
-
-                u'firmName': u'Hollins & Levy',
-                u'clientName': u'Shea Jensen',
-                u'date': '09-17-19', # datetime.datetime.now(),
+                u'clientName': dt['cname'],
+                u'date': dt['ddate'], # datetime.datetime.now(),
                 u'audioURL': audioBlob.generate_signed_url(expiration=blob_expiry),
                 u'transcriptionURL': transcriptionBlob.generate_signed_url(expiration=blob_expiry),
             }
 
-            sampleCollection_ref.document(u'Shea Jensen-9-17-19').set(data)
+            # The name of the document equals the "'clientName'-'deposition date'"
+            collName = dt['cname'] + '-' + dt['ddate']
+            print("Collection name is: " + collName)
+            firmCollection_ref.document(collName).set(data)
 
             return redirect(url_for('dashboard'))
 
-
-#@app.route('/uploads/<filename>')
-#def uploaded_file(filename):
-#    return send_from_directory(app.config['UPLOAD_FOLDER'],
-#                               filename)
-
-# @app.route('/uploads/<path:filename>', methods=['GET', 'POST'])
-#def download(filename):
-#    uploads = os.path.join(current_app.root_path, app.config['UPLOAD_FOLDER'])
-#    return send_from_directory(directory=uploads, filename=filename)
-
 @app.route('/dashboard', methods=['GET', 'POST'])
-def dashboard():  
-    doc_ref = sampleCollection_ref.document(u'Shea Jensen-9-17-19').get()
-    return render_template("dashboard.html", d=doc_ref.to_dict())
+def dashboard(): 
+    # get all the documents for this law firm 
+    docs = db.collection(u'Hollins & Levy').stream()
+    return render_template("dashboard.html", d=docs, fn='Hollins & Levy')
 
-
-#---------------------------------------------------------
-# 4. Define what to do when a user hits the /about route
 @app.route("/about")
 def about():
     print("Server received request for 'About' page...")
     return "Your name and current location"
-
-#5. 
+ 
 @app.route("/contact")
 def contact():
     print("Server received request for 'Contact' page...")

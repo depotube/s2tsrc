@@ -30,9 +30,13 @@
     <div class="row mt-5">
       <div class="col-md-12">
         <h3 style="color: white; font-weight: bold; font-family: Arial, Helvetica, sans-serif;">
-          Upload new File
+          Upload new file
         </h3>
         <form action="{{ url_for('upload_file') }}" method=post enctype=multipart/form-data>
+          <label for="cname">Client name:</label>
+          <input type="text" id="cname" name="cname"><br><br>
+          <label for="ddate">Date of Deposition:</label>
+          <input type="text" id="ddate" name="ddate"><br><br>
           <input type=file name=file>
           <input type=submit value=upload>
         </form>
@@ -40,7 +44,7 @@
     </div>
   </div>
   <footer>
-    <p>Copyright (c) 2000 Depotube All Rights Reserved<br>
+    <p>Copyright (c) 2020 Depotube All Rights Reserved<br>
     <a href="mailto:hq@depotube.com">hq@depotube.com</a></p>
   </footer>
 </body>

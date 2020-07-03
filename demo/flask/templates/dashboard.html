@@ -25,23 +25,25 @@
 <body style="background-color:black">
   <div class="container-fluid" >
     <div class="jumbotron text-center">
-      <h2 style="color:lightcoral">Audios and Transcriptions for {{d['firmName']}}</h2>
+      <h2 style="color:lightcoral">Audios and Transcriptions for {{fn}}</h2>
       <p><a class="btn btn-primary btn-lg" href="/" role="button">Upload New File</a></p>
     </div>
     <!-- ultimately, iterate over these-->
     <!-- Row 1 -->
+    {% for item in d %}
     <div class="row mt-5">
 	   <div class="col-md-12">
 	     <h3 style="color: white; font-weight: bold; font-family: Arial, Helvetica, sans-serif;">
-	            {{d['clientName']}} {{d['date']}}
+	            {{item.to_dict()['clientName']}} {{item.to_dict()['date']}}
        </h3>
-	     <p style="color: lightcoral"><a href="{{d['audioURL']}}">Audio</a></p>
-	     <p style="color:lightcoral"><a href="{{d['transcriptionURL']}}">Transcription</a></p>
+	     <p style="color: lightcoral"><a href="{{item.to_dict()['audioURL']}}">Audio</a></p>
+	     <p style="color:lightcoral"><a href="{{item.to_dict()['transcriptionURL']}}">Transcription</a></p>
 	   </div>
-	  </div>
+    </div>
+    {% endfor %}
   </div>
   <footer>
-    <p>Copyright (c) 2000 Depotube All Rights Reserved<br>
+    <p>Copyright (c) 2020 Depotube All Rights Reserved<br>
     <a href="mailto:hq@depotube.com">hq@depotube.com</a></p>
   </footer>
 </body>

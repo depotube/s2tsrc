@@ -93,8 +93,9 @@ def upload_file():
 
             # The name of the document equals the "'clientName'-'deposition date'"
             collName = dt['cname'] + '-' + dt['ddate']
-            print("Collection name is: " + collName)
-            firmCollection_ref.document(collName).set(data)
+            corrected_collName = collName.replace('/', '-')
+            print("Collection name is: " + corrected_collName)
+            firmCollection_ref.document(corrected_collName).set(data)
 
             return redirect(url_for('dashboard'))
 

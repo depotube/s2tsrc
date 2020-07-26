@@ -1,0 +1,4 @@
+# cloudbuild.yaml
+runtime: python37
+env: standard
+service: default

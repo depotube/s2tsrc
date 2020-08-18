@@ -47,6 +47,29 @@
     <p>Copyright (c) 2020 Depotube All Rights Reserved<br>
     <a href="mailto:hq@depotube.com">hq@depotube.com</a></p>
   </footer>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBGc7e7oCkLNON1g1qPYRx0Id-VGs5fe3k",
+    authDomain: "john-depotube-personal.firebaseapp.com",
+    databaseURL: "https://john-depotube-personal.firebaseio.com",
+    projectId: "john-depotube-personal",
+    storageBucket: "john-depotube-personal.appspot.com",
+    messagingSenderId: "531647248466",
+    appId: "1:531647248466:web:1e8e5a35e7f44aa3c5c78b",
+    measurementId: "G-W5S1FC575D"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
 </body>
 
 </html>

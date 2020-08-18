@@ -40,7 +40,8 @@ def sample_transcribe(newfile_name, object_uri, bucket):
     operation = client.long_running_recognize(config, audio)
 
     print(u"Waiting for operation to complete...")
-    response = operation.result()
+    # set timeout to 4 hours, for now...
+    response = operation.result(timeout=14400)
 
     # concatenate transcript into string bufer
     soutput = StringIO()
